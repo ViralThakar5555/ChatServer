@@ -51,7 +51,7 @@ app.post("/uploadimage", upload.single("imagefile"), (req, res) => {
 
   console.log("file Uploaded Successfully");
   //  res.send("File uploaded successfully!");
-  const imageUrl = `http://192.168.29.92:${PORT}/images/${req.file.filename}`;
+  const imageUrl = `https://chatserver-7o6q.onrender.com/images/${req.file.filename}`;
 
   console.log("ImageUrl is ", imageUrl);
 
