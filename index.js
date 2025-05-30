@@ -11,7 +11,7 @@ const cors = require("cors");
 
 const multer = require("multer");
 
-const PORT=8080;
+const PORT = 8080;
 
 //app.use("/static", express.static(path.join(__dirname, "uploads")));
 //app.use("/static", express.static(path.join(__dirname,"public" ,"uploads")));
@@ -38,25 +38,28 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-
+app.get("/", (req, res) => {
+  return res.status(200).send("Welcome to Your Backend Server");
+});
+app.get("/test", (req, res) => {
+  return res.status(200).send("Your Backend Server is Live Now");
+});
 app.post("/uploadimage", upload.single("imagefile"), (req, res) => {
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
   }
 
   console.log("file Uploaded Successfully");
-//  res.send("File uploaded successfully!");
-  const imageUrl =`http://192.168.29.92:${PORT}/images/${req.file.filename}`;
-  
-  console.log("ImageUrl is ",imageUrl);
+  //  res.send("File uploaded successfully!");
+  const imageUrl = `http://192.168.29.92:${PORT}/images/${req.file.filename}`;
 
-  res
-    .status(200)
-    .json({
-      result: "Image Uploaded Successfully",
-      file_info: req.file,
-      image_url: imageUrl,
-    });
+  console.log("ImageUrl is ", imageUrl);
+
+  res.status(200).json({
+    result: "Image Uploaded Successfully",
+    file_info: req.file,
+    image_url: imageUrl,
+  });
 });
 // defining the io function to listen to the socket events
 
